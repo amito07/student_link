@@ -1,8 +1,26 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Logo from '../../images/student_link.jpg'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
+import {useDispatch,useSelector} from 'react-redux'
+import { logout } from '../Actions/userActions'
 
 function Navbar() {
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const userLogin = useSelector(state => state.userLogin)
+    const {loading, error, userInfo} = userLogin
+
+    useEffect(() => {
+        if(!userInfo){
+            history.push('/')
+        }
+    }, [userInfo])
+    const handleLogOut = (e)=>{
+        e.preventDefault()
+        dispatch(logout())
+
+    }
     return (
         <nav className='bg-gray-100'>
             <div className='max-w-7xl border-none mx-auto'>
@@ -14,9 +32,11 @@ function Navbar() {
                     </Link>
                     <div className='hidden md:flex items-center space-x-3 mr-10'>
                         <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/'>Home</Link>
-                        <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/profile'>Profile</Link>
-                        <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/course'>Course</Link>
-                        <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/login'>Login</Link>
+                        {userInfo && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/profile'>Profile</Link>}
+                        {userInfo && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/course'>Course</Link>}
+                        {userInfo ? <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' onClick={handleLogOut}>Log out</Link> :
+                        <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/login'>Login</Link> }
+                    
                     </div>
                     <div className='md:hidden flex items-center'>
                         <button>
