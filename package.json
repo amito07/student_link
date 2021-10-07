@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix student-link",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+
   },
   "author": "amit",
   "license": "ISC",
