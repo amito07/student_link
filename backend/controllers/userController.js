@@ -66,4 +66,31 @@ const authUser = asyncHandaler(async(req,res) => {
     }
 })
 
-module.exports = {registerUser,authUser}
+//fetch user profile
+//@route GET /api/users/profile
+//@access public
+const getUserProfile = asyncHandaler(async(req,res) => {
+    console.log("Get User Profile")
+    
+    const user = await User.findById(req.user._id)
+
+    if(user){
+        res.json({
+            _id: user._id,
+            name:user.name,
+            email: user.email,
+            institute: user.institute,
+            address: user.address,
+            isAdmin: user.isAdmin,
+            isTeacher:user.isTeacher,
+            courses:user.courses,
+            token : generateToken(user._id)
+        })
+
+    }else{
+        res.status(404)
+        throw new Error('User Not Found')
+    }
+})
+
+module.exports = {registerUser,authUser,getUserProfile}

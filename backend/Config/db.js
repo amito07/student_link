@@ -3,7 +3,7 @@ const dotenv = require("dotenv")
 dotenv.config()
 
 const connectDB = async()=>{
-    console.log(process.env.MONGO_URI);
+    // console.log(process.env.MONGO_URI);
     try {
 
         const conn = await mongoose.connect(process.env.MONGO_URI,{

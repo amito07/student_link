@@ -1,9 +1,33 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React,{useState,useEffect} from 'react'
+import {Link,useHistory} from 'react-router-dom'
+import {useDispatch , useSelector} from 'react-redux'
+import Message from '../Notify/Message'
+import Loader from '../Notify/Loader'
+import { getuserDetails } from '../Actions/userActions'
+
 
 function Profile() {
+
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const userLogin = useSelector(state => state.userLogin)
+    const {loading,error,userInfo} = userLogin
+
+    useEffect(() => {
+        if(!userInfo){
+            history.push('/login')
+        }else{
+            if(!userInfo.name){
+                dispatch(getuserDetails('profile'))
+            }
+        }
+    }, [dispatch,history,userInfo]) 
+
     return (
         <>
+            {loading && <Loader/>}
             <div>
                 <h1 className='text-4xl font-bold mx-16 mt-10'>Profile</h1>
 
@@ -17,7 +41,7 @@ function Profile() {
                     </label>
                     </div>
                     <div>
-                        <h1 className='font-bold text-xl'>Amit Mandal</h1>
+                        <h1 className='font-bold text-xl'>{userInfo && userInfo.name}</h1>
                     </div>
                 </div>
                 {/* Email part */}
@@ -28,7 +52,7 @@ function Profile() {
                     </label>
                     </div>
                     <div>
-                        <h1 className='font-bold text-xl'>lianbadhon@gmail.com</h1>
+                        <h1 className='font-bold text-xl'>{userInfo && userInfo.email}</h1>
                     </div>
                 </div>
                 {/* Institute part */}
@@ -39,7 +63,7 @@ function Profile() {
                     </label>
                     </div>
                     <div>
-                        <h1 className='font-bold text-xl'>United International University</h1>
+                        <h1 className='font-bold text-xl'>{userInfo && userInfo.institute}</h1>
                     </div>
                 </div>
             </div>
