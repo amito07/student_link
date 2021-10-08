@@ -39,7 +39,6 @@ function AllCourse() {
                                 <div className='p-12'>
                                     <h1 className='font-bold text-xl text-white'><span className='text-black'>Course Name:</span>{course.name}</h1>
                                     <h1 className='font-bold text-xl text-white'><span className='text-black'>Class Time:</span>{course.courseTime}</h1>
-                                    <h1 className='font-bold text-xl text-white'><span className='text-black'>Course Teacher:</span>{course.courseTeacher ? course.courseTeacher : 'None'}</h1>
                                     <h1 className='font-bold text-xl text-white'><span className='text-black'>Course Code:</span>{course.courseCode}</h1>
                                     <h1 className='font-bold text-xl text-white'><span className='text-black'>Course Details:</span>{course.courseDetails}</h1>
                                 </div>

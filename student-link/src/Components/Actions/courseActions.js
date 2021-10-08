@@ -1,5 +1,6 @@
 import {COURSE_REG_REQUEST,COURSE_REG_SUCCESS,COURSE_REG_FAIL,COURSE_REG_CLEAR,
-    COURSE_SHOW_REQUEST,COURSE_SHOW_SUCCESS,COURSE_SHOW_FAIL} from '../Constaints/courseConstaints'
+    COURSE_SHOW_REQUEST,COURSE_SHOW_SUCCESS,COURSE_SHOW_FAIL,COURSE_ASSIGN_REQUEST,
+    COURSE_ASSIGN_SUCCESS,COURSE_ASSIGN_FAIL} from '../Constaints/courseConstaints'
 import axios from 'axios'
 
 //Registration Action
@@ -70,6 +71,38 @@ export const allcourses = ()=>async(dispatch,getState)=>{
     } catch (error) {
         dispatch({
             type: COURSE_SHOW_FAIL,
+            payload: error.response && error.response.data.message ?
+            error.response.data.message : error.message,
+        })
+        
+    }
+}
+
+//Assign Teacher
+export const assignTeacherCourse = (courseCode,email)=>async(dispatch)=>{
+    try {
+        dispatch({
+            type: COURSE_ASSIGN_REQUEST,
+        })
+
+
+        //set the header for the post method
+        const config = {
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }
+
+        
+        await axios.post('/api/course/assignteacher',{courseCode,email} ,config)
+
+        dispatch({
+            type: COURSE_ASSIGN_SUCCESS
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: COURSE_ASSIGN_FAIL,
             payload: error.response && error.response.data.message ?
             error.response.data.message : error.message,
         })

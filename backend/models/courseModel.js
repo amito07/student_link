@@ -9,11 +9,10 @@ const courseSchema = mongoose.Schema({
         type:String,
         require:true
     },
-    courseTeacher:{
+    courseTeacher:[{
             type:mongoose.Types.ObjectId,
             ref:'User'
-    }
-    ,
+    }],
     courseStudent:[
         {
             type:mongoose.Types.ObjectId,

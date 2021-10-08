@@ -55,7 +55,9 @@ const enrollCourse = asyncHandaler(async(req,res) => {
         await Course.updateOne({
             _id:course[0]._id
         },{
-            courseStudent:req.user._id
+            $push:{
+                courseStudent:req.user._id
+            }
         })
         
     } catch (error) {
@@ -63,5 +65,42 @@ const enrollCourse = asyncHandaler(async(req,res) => {
     }
 })
 
+//Assign New Teacher
+const assignTeacher = asyncHandaler(async(req,res) => {
+    const {courseCode,email} = req.body
 
-module.exports = {registerCourse,getAllCourse,enrollCourse}
+    try {
+
+       const user1 =  await User.updateOne({email:email}, {
+            isTeacher: true
+        });
+       const course = await Course.find({courseCode: courseCode})
+       const user = await User.find({email:email})
+       console.log(course[0])
+       console.log(user[0])
+       await User.updateOne({
+                _id:user[0]._id
+            },{
+                $push:{
+                    courses: course[0]._id
+                }
+            })
+
+            await Course.updateOne({
+                _id:course[0]._id
+            },{
+                $push:{
+                    courseTeacher:user[0]._id
+                }
+            })
+        res.json(user)
+
+        
+    } catch (error) {
+        console.log(error)
+    } 
+    
+})
+
+
+module.exports = {registerCourse,getAllCourse,enrollCourse,assignTeacher}

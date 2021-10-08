@@ -13,7 +13,6 @@ function Profile() {
 
     const userLogin = useSelector(state => state.userLogin)
     const {loading,userInfo} = userLogin
-    console.log(userInfo.courses);
 
     useEffect(() => {
         if(!userInfo){

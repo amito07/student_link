@@ -36,21 +36,21 @@ function Home() {
                                 <img src={Resource} alt="Resource" class='w-full h-32 sm:h-48 object-cover'/>
                                 <div class='m-4'>
                                 <span class='font-bold'>Vast Resources</span>
-                                <span class='block text-gray-500 text-sm'>Recipe by Amit</span>
+                                <span class='block text-gray-500 text-sm'>by Amit</span>
                                 </div>
                             </div>
                             <div class='card  hover:shadow-lg transform transition duration-500 hover:scale-110'> 
                                 <img src={Communication} alt="noodles" class='w-full h-32 sm:h-48 object-cover'/>
                                 <div class='m-4'>
                                 <span class='font-bold'>Communication network</span>
-                                <span class='block text-gray-500 text-sm'>Recipe by Amit</span>
+                                <span class='block text-gray-500 text-sm'>by Amit</span>
                                 </div>
                             </div>
                             <div class='card  hover:shadow-lg transform transition duration-500 hover:scale-110'> 
                                 <img src={Responder} alt="noodles" class='w-full h-32 sm:h-48 object-cover'/>
                                 <div class='m-4'>
                                 <span class='font-bold'>Quick Responder</span>
-                                <span class='block text-gray-500 text-sm'>Recipe by Amit</span>
+                                <span class='block text-gray-500 text-sm'>by Amit</span>
                                 </div>
                             </div>
                     </div>

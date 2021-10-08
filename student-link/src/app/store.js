@@ -2,8 +2,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { userRegisterReducer , userLoginReducer,courseAddInStudentReducer, courselistReducer} from '../Components/Reducers/userReducer';
-import { courseAddReducer,allCoursesReducer } from '../Components/Reducers/courseReducer';
+import { courseAddReducer,allCoursesReducer, teacherAddReducer } from '../Components/Reducers/courseReducer';
 const userinfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
 
 //initial the state
 const initialState = {
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     courseAdd:courseAddReducer,
     allCourses:allCoursesReducer,
     courseAddInStudent:courseAddInStudentReducer,
-    courselists:courselistReducer
+    courselists:courselistReducer,
+    teacherAdd:teacherAddReducer
 })
 
 //it is work as a middleware (thunk)

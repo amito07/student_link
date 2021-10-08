@@ -1,46 +1,70 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
+import Message from '../Notify/Message'
+import {useDispatch,useSelector} from 'react-redux'
+import {assignTeacherCourse ,clearCourse} from '../Actions/courseActions'
+import Loader from '../Notify/Loader'
 
 function AssignTeacher() {
+        const dispatch = useDispatch()
+        const [courseCode, setCourseCode] = useState('')
+        const [email, setEmail] = useState('')
+        const teacherAdd = useSelector(state => state.teacherAdd)
+        const {loading,error,success} = teacherAdd
+        const handleAddTeacher = (e)=>{
+            e.preventDefault();
+            dispatch(assignTeacherCourse(courseCode,email))
+            setCourseCode('')
+            setEmail('')
+        }
+        const courseAddClear = ()=>{
+            dispatch(clearCourse())
+        }
+
         return (
             <>
             <div className='grid grid-col-3'>
                 <div className='col-span-1 mx-10 mt-5'>
                     <Link to='/admindashboard'>
-                        <button class="text-white transition duration-500 ease-in-out bg-blue-600 transform hover:-translate-y-1 hover:scale-110 px-10 py-2 rounded-full">
+                        <button onClick={courseAddClear} class="text-white transition duration-500 ease-in-out bg-blue-600 transform hover:-translate-y-1 hover:scale-110 px-10 py-2 rounded-full">
                             Back
                         </button>
                     </Link>
                 </div>
                 <div className='border shadow rounded w-2/4 mx-auto col-span-2 p-5'>
+                    {loading && <Loader/>}
+                    {success && <Message variant='true' >Teacher Added</Message>}
+                    {error && <Message variant='false'>Error</Message>}
                     <h1 className='text-3xl text-center py-5 font-bold'>Assign Teacher</h1>
                     <form class="w-full max-w-sm">
                         {/* course name */}
                         <div class="md:flex md:items-center mb-6">
                             <div class="md:w-1/3">
                             <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-                                Course Name
+                                Course Code
                             </label>
                             </div>
                             <div class="md:w-2/3">
-                            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="text" placeholder="Course Name"/>
+                            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="text" placeholder="Course Code"
+                            value={courseCode} onChange={(e)=>setCourseCode(e.target.value)}/>
                             </div>
                         </div>
                         {/* course code */}
                         <div class="md:flex md:items-center mb-6">
                             <div class="md:w-1/3">
                             <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
-                                Teacher Name
+                                Teacher Email
                             </label>
                             </div>
                             <div class="md:w-2/3">
-                            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-password" type="text" placeholder="Teacher Name"/>
+                            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-password" type="text" placeholder="Teacher Email"
+                            value={email} onChange={(e)=>setEmail(e.target.value)}/>
                             </div>
                         </div>
                         <div class="md:flex md:items-center">
                             <div class="md:w-1/3"></div>
                             <div class="md:w-2/3">
-                            <button class="shadow bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded" type="button">
+                            <button onClick={handleAddTeacher} class="shadow bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded" type="button">
                                 Add
                             </button>
                             </div>

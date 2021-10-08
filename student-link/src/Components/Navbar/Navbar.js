@@ -32,8 +32,9 @@ function Navbar() {
                     </Link>
                     <div className='hidden md:flex items-center space-x-3 mr-10'>
                         <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/'>Home</Link>
-                        {userInfo && !userInfo.isAdmin && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/profile'>Profile</Link>}
-                        {userInfo && !userInfo.isAdmin && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/course'>Course</Link>}
+                        {userInfo && !userInfo.isAdmin && !userInfo.isTeacher && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/profile'>Profile</Link>}
+                        {userInfo && !userInfo.isAdmin && !userInfo.isTeacher && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/course'>Course</Link>}
+                        {userInfo && userInfo.isTeacher && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/profile'>Teacher Dashboard</Link>}
                         {userInfo && userInfo.isAdmin && <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/admindashboard'>Admin Dashboard</Link>}
                         {userInfo ? <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' onClick={handleLogOut}>Log out</Link> :
                         <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500' to='/login'>Login</Link> }
