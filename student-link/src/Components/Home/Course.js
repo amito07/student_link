@@ -3,6 +3,7 @@ import Message from '../Notify/Message'
 import Loader from '../Notify/Loader'
 import { allcourses } from '../Actions/courseActions'
 import {useDispatch,useSelector} from 'react-redux'
+import { addCourseToStudent } from '../Actions/userActions'
 
 
 function Course() {
@@ -14,7 +15,7 @@ function Course() {
     const {loading, error, courses} = allCourses
 
     const submitEnroll = (code) =>{
-        console.log(code);
+        dispatch(addCourseToStudent(code))
     }
 
     return (

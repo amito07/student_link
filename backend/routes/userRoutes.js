@@ -7,8 +7,8 @@ const protect = require('../middleware/authMiddleware')
 
 router.route('/register').post(registerUser)
 router.route('/login').post(authUser)
-router.route('/profile').get(protect,getUserProfile)
 router.route('/enrollcourse/:id').post(protect,enrollCourse)
+router.route('/profile').get(protect,getUserProfile)
 
 
 

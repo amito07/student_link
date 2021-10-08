@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 import {useDispatch , useSelector} from 'react-redux'
 import Loader from '../Notify/Loader'
 import { getuserDetails } from '../Actions/userActions'
@@ -13,6 +13,7 @@ function Profile() {
 
     const userLogin = useSelector(state => state.userLogin)
     const {loading,userInfo} = userLogin
+    console.log(userInfo.courses);
 
     useEffect(() => {
         if(!userInfo){
@@ -67,20 +68,7 @@ function Profile() {
                 </div>
             </div>
             <div className='mt-32'>
-                <h1 className='text-4xl font-bold mx-16 mt-10'>Your Course</h1>
-                {/* border bottom */}
-                <div className='border-b-2 w-2/4 mx-16 mt-5'></div>
-
-                <div className='grid lg:grid-cols-3 gap-10 mt-10 mx-10'>
-                    {/* Course Card */}
-                    <div className='border rounded-lg shadow-lg bg-gradient-to-r from-green-600 to-green-400 mx-5'>
-                        <div className='p-12'>
-                            <h1 className='font-bold text-xl text-white'><span className='text-black'>Course Name:</span> NodeJs Tutorial</h1>
-                            <h1 className='font-bold text-xl text-white'><span className='text-black'>Class Time:</span> Tue 12.00pm </h1>
-                            <h1 className='font-bold text-xl text-white'><span className='text-black'>Course Teacher:</span> Amit Mandal </h1>
-                        </div>
-                    </div>
-                </div>
+                <Link className='btn shadow bg-gray-300 p-2 hover:bg-blue-600 hover:text-white hover:transition duration-500 ml-12' to='/allcourses' >Click To See Your Courses</Link>
             </div>
         </>
     )

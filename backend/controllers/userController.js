@@ -64,22 +64,11 @@ const authUser = asyncHandaler(async(req,res) => {
 
 //fetch user profile
 const getUserProfile = asyncHandaler(async(req,res) => {
-    console.log("Get User Profile")
     
-    const user = await User.findById(req.user._id)
+    const user = await User.findById(req.user._id).populate("courses")
 
     if(user){
-        res.json({
-            _id: user._id,
-            name:user.name,
-            email: user.email,
-            institute: user.institute,
-            address: user.address,
-            isAdmin: user.isAdmin,
-            isTeacher:user.isTeacher,
-            courses:user.courses,
-            token : generateToken(user._id)
-        })
+        res.json(user)
 
     }else{
         res.status(404)

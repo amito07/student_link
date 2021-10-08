@@ -12,7 +12,6 @@ const protect = asyncHandaler(async(req,res,next)=>{
         try {
             //get specific token value
             token = req.headers.authorization.split(' ')[1]
-            // console.log(token);
             
             //decode the token value and get user _id
             const decode = jwt.verify(token,process.env.JWT_SECRET)
