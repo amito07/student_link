@@ -10,7 +10,7 @@ function Home() {
             {/* banner part */}
             <div className='grid grid-cols-3 mt-5'>
                 <div className='col-span-1'>
-                    <img className='w-min' src={HomeImage}/>
+                    <img className='w-min' src={HomeImage} alt='home'/>
                 </div>
                 <div className='col-span-2 mt-10'>
                     <h1 className='text-2xl md:text-8xl font-mono text-center'><span className='text-blue-700'>Student</span>Link</h1>

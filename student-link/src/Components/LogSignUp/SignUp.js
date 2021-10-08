@@ -37,7 +37,7 @@ function SignUp() {
             {loading && <Loader/>}
             <div className='grid grid-cols-3'>
                 <div className='col-span-2 mt-10 ml-10'>
-                    <img className='invisible md:visible w-3/4 ml-10 mt-5' src={SignupImage}/>
+                    <img className='invisible md:visible w-3/4 ml-10 mt-5' src={SignupImage} alt='home'/>
                 </div>
                 <div className='col-span-3 md:col-span-1 mt-16 mr-10'>
                     <form onSubmit={submitHandle} className='border flex flex-col px-10 py-20 rounded-md shadow-md'>

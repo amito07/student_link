@@ -3,8 +3,6 @@ const User = require('../models/userModel')
 const generateToken = require('../utils/generateToken')
 
 //Register a new user
-//@route GET /api/users/profile
-//@access public
 const registerUser = asyncHandaler(async(req,res) => {
     const {name ,email,password,institute} = req.body
 
@@ -36,8 +34,6 @@ const registerUser = asyncHandaler(async(req,res) => {
 })
 
 //auth user and get token(Log In)
-//@route POST /api/users/login
-//@access public
 const authUser = asyncHandaler(async(req,res) => {
     const{email, password} = req.body
 
@@ -67,8 +63,6 @@ const authUser = asyncHandaler(async(req,res) => {
 })
 
 //fetch user profile
-//@route GET /api/users/profile
-//@access public
 const getUserProfile = asyncHandaler(async(req,res) => {
     console.log("Get User Profile")
     

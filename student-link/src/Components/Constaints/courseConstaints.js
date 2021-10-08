@@ -1,0 +1,5 @@
+//add course constaints
+export const COURSE_REG_REQUEST = 'COURSE_REG_REQUEST'
+export const COURSE_REG_SUCCESS = 'COURSE_REG_SUCCESS'
+export const COURSE_REG_FAIL = 'COURSE_REG_FAIL'
+export const COURSE_REG_CLEAR = 'COURSE_REG_CLEAR'

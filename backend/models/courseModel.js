@@ -6,7 +6,7 @@ const courseSchema = mongoose.Schema({
         require:true
     },
     courseCode:{
-        type:Number,
+        type:String,
         require:true
     },
     courseTeacher:{
@@ -18,7 +18,15 @@ const courseSchema = mongoose.Schema({
             type:mongoose.Types.ObjectId,
             ref:'User'
         }
-    ]
+    ],
+    courseDetails:{
+        type:String,
+        require:true
+    },
+    courseTime:{
+        type:String,
+        require:true
+    }
 })
 
 const Course = mongoose.model('Course',courseSchema)

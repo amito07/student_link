@@ -1,7 +1,6 @@
-import React,{useState,useEffect} from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import React,{useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
 import {useDispatch , useSelector} from 'react-redux'
-import Message from '../Notify/Message'
 import Loader from '../Notify/Loader'
 import { getuserDetails } from '../Actions/userActions'
 
@@ -13,7 +12,7 @@ function Profile() {
     const dispatch = useDispatch();
 
     const userLogin = useSelector(state => state.userLogin)
-    const {loading,error,userInfo} = userLogin
+    const {loading,userInfo} = userLogin
 
     useEffect(() => {
         if(!userInfo){
