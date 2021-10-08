@@ -1,5 +1,5 @@
 import {USER_REG_REQUEST,USER_REG_SUCCESS,USER_REG_FAIL,USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGIN_FAIL,USER_LOGOUT,
-USER_DETAILS_REQUEST,USER_DETAILS_SUCCESS,USER_DETAILS_FAIL} from '../Constaints/userConstaints'
+USER_DETAILS_REQUEST,USER_DETAILS_SUCCESS,USER_DETAILS_FAIL,COURSE_STUDENT_REQUEST,COURSE_STUDENT_SUCCESS,COURSE_STUDENT_FAIL} from '../Constaints/userConstaints'
 import axios from 'axios'
 
 //Registration Action
@@ -110,6 +110,41 @@ export const getuserDetails = (id)=>async(dispatch,getState)=>{
     } catch (error) {
         dispatch({
             type: USER_DETAILS_FAIL,
+            payload: error.response && error.response.data.message ?
+            error.response.data.message : error.message,
+        })
+        
+    }
+}
+
+export const addCourseToStudent = (id)=>async(dispatch,getState)=>{
+    try {
+        dispatch({
+            type: COURSE_STUDENT_REQUEST,
+        })
+
+        //get the user info
+        const {userLogin:{userInfo}} = getState()
+        //set the header for the post method
+        const config = {
+            headers:{
+                'Content-Type':'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        //getting user data including tokens and so..........
+        await axios.post(`/api/users/enrollcourse/${id}`,config)
+
+        dispatch({
+            type: COURSE_STUDENT_SUCCESS,
+        })
+        //convert data in string formate...web receive string formate only
+        // localStorage.setItem('userInfo',JSON.stringify(data))
+        
+    } catch (error) {
+        dispatch({
+            type: COURSE_STUDENT_FAIL,
             payload: error.response && error.response.data.message ?
             error.response.data.message : error.message,
         })

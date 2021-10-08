@@ -1,5 +1,6 @@
 const asyncHandaler = require('express-async-handler')
 const Course = require('../models/courseModel')
+const User = require('../models/userModel')
 
 //Register a new course
 const registerCourse = asyncHandaler(async(req,res) => {
@@ -30,4 +31,37 @@ const registerCourse = asyncHandaler(async(req,res) => {
     
 })
 
-module.exports = {registerCourse}
+//get all course
+const getAllCourse = asyncHandaler(async(req,res) => {
+    const course = await Course.find({})
+    res.json(course)
+
+})
+
+//Update user profile
+//@route GET /api/users/profile
+//@access public
+const enrollCourse = asyncHandaler(async(req,res) => {
+    const course = await Course.find({courseCode: req.params.id})
+    const user = await User.findById(req.user._id)
+    try {
+        await User.updateOne({
+            _id:req.user._id
+        },{
+            $push:{
+                courses: course[0]._id
+            }
+        })
+        await Course.updateOne({
+            _id:course[0]._id
+        },{
+            courseStudent:req.user._id
+        })
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+module.exports = {registerCourse,getAllCourse,enrollCourse}

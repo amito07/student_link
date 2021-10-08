@@ -45,3 +45,17 @@ export const userDetailsReducer = (state = {user:{}},action)=>{
     }
 }
 
+//courseStudentAdd
+export const courseAddInStudentReducer = (state = {},action)=>{
+    switch( action.type ){
+        case USER_DETAILS_REQUEST:
+            return {...state,loading: true }
+        case USER_DETAILS_SUCCESS:
+            return {loading: false , success:true}
+        case USER_DETAILS_FAIL:
+            return {loading: false, error: action.payload}   
+        default:
+            return state        
+    }
+}
+

@@ -87,4 +87,5 @@ const getUserProfile = asyncHandaler(async(req,res) => {
     }
 })
 
+
 module.exports = {registerUser,authUser,getUserProfile}
